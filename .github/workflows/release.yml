@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'The version type following the SemVer specification'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set-up Git
+        run: |
+          git config --global user.name 'Alexandre Bordiere'
+          git config --global user.email 'alexandre-bordiere@users.noreply.github.com'
+      - name: Increment version
+        run: |
+          TAG=$(npm version minor -m "chore: bump version to v%s")
+          echo "TAG=$TAG" >> $GITHUB_ENV
+      - run: git push --follow-tags
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.TAG }}
+          token: ${{ secrets.TOKEN }}
