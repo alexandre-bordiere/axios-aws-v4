@@ -36,7 +36,13 @@ export function awsSignInterceptor(
 
     return {
       ...config,
-      headers: signed.headers,
+      headers: {
+        ...config.headers,
+        Authorization: signed.headers?.Authorization,
+        Host: signed.headers?.Host,
+        'X-Amz-Date': signed.headers?.['X-Amz-Date'],
+        'X-Amz-Security-Token': signed.headers?.['X-Amz-Security-Token'],
+      },
     }
   }
 }

@@ -1,3 +1,5 @@
+/* eslint-disable no-undefined */
+
 import { awsSignInterceptor } from '../src'
 
 describe('awsSignInterceptor', () => {
@@ -25,12 +27,13 @@ describe('awsSignInterceptor', () => {
           name: 'John Doe',
           email: 'john-doe@example.com',
         },
-        headers: expect.objectContaining({
-          Authorization: expect.anything(),
+        headers: {
+          Authorization: expect.any(String),
           'Content-Type': 'application/json',
           Host: 'example.com',
-          'X-Amz-Date': expect.anything(),
-        }),
+          'X-Amz-Date': expect.any(String),
+          'X-Amz-Security-Token': undefined,
+        },
       })
     )
   })
