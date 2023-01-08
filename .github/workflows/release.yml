@@ -26,7 +26,7 @@ jobs:
           git config --global user.email 'alexandre-bordiere@users.noreply.github.com'
       - name: Increment version
         run: |
-          TAG=$(npm version minor -m "chore: bump version to v%s")
+          TAG=$(npm version ${{ inputs.version_type }} -m "chore: bump version to v%s")
           echo "TAG=$TAG" >> $GITHUB_ENV
       - run: git push --follow-tags
       - name: Create release
