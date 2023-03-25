@@ -1,6 +1,6 @@
 {
   "name": "@alexandre-bordiere/axios-aws-v4",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Sign your Axios requests with AWSv4",
   "keywords": [
     "awsv4",
