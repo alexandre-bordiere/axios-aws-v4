@@ -1,11 +1,11 @@
-import { Credentials, Provider } from '@aws-sdk/types'
+import { AwsCredentialIdentity, Provider } from '@aws-sdk/types'
 import { sign } from 'aws4'
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 import { buildUrl, extractCredentials, stripAxiosHeaders } from './utils'
 
 export interface Options {
-  credentials?: Credentials | Provider<Credentials>
+  credentials?: AwsCredentialIdentity | Provider<AwsCredentialIdentity>
   service?: string
 }
 
