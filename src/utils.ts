@@ -1,5 +1,5 @@
 import { defaultProvider } from '@aws-sdk/credential-provider-node'
-import { Credentials, Provider } from '@aws-sdk/types'
+import { AwsCredentialIdentity, Provider } from '@aws-sdk/types'
 import { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios'
 import _omit from 'lodash.omit'
 
@@ -20,8 +20,8 @@ export function buildUrl(config: AxiosRequestConfig): URL {
 }
 
 export async function extractCredentials(
-  credentials: Credentials | Provider<Credentials> = defaultProvider()
-): Promise<Credentials> {
+  credentials: AwsCredentialIdentity | Provider<AwsCredentialIdentity> = defaultProvider()
+): Promise<AwsCredentialIdentity> {
   if (typeof credentials === 'function') {
     return credentials()
   }
